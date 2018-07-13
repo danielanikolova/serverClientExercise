@@ -1,5 +1,13 @@
 package serverClientLibrary;
 
-public class OutputThread {
+import java.net.Socket;
+
+public class OutputThread extends Thread{
+
+	private Socket socket;
+
+	public OutputThread(Socket socket) {
+		this.socket = socket;
+	}
 
 }

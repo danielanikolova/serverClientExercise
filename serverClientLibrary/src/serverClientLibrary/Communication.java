@@ -1,16 +1,13 @@
 package serverClientLibrary;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+
 import java.net.Socket;
 
 public class Communication extends Thread {
 
 	private Socket socket;
 	private String localAddress;
-	private DataOutputStream output = null;
-	private DataInputStream input = null;
+
 
 	public Communication(Socket socket) {
 
@@ -19,13 +16,22 @@ public class Communication extends Thread {
 
 	}
 
+	@Override
+	public void run() {
 
-	private void closeSocket() {
+//		boolean continueCommunication = FTPServerprotocol.secureConnectionEstablished(socket);
+
+		InputThread inputThread = new InputThread(socket);
+		OutputThread outputThread = new OutputThread(socket);
+
+		outputThread.start();
+		inputThread.start();
+
 		try {
-			socket.close();
-			input.close();
-			output.close();
-		} catch (IOException e) {
+			outputThread.join();
+			inputThread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
