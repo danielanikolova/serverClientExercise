@@ -15,23 +15,24 @@ public class RunClient {
 
 		try {
 			System.out.println("Connecting to server " + host);
-			communicationSocket = new Socket(host, port);			
-		
+			communicationSocket = new Socket(host, port);
+			System.out.println("Connected to server.");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		Communication communication = new Communication(communicationSocket);
-		
+
 		communication.start();
-		
+
 		try {
 			communication.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		System.out.println("Client disconnected.");
 
 	}

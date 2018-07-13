@@ -22,7 +22,7 @@ public class RunServer {
 		}
 
 		Communication communication = new Communication(communicationSocket);
-		
+
 		communication.start();
 
 		try {
@@ -30,8 +30,7 @@ public class RunServer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 
 		System.out.println("Server is closed");
 
