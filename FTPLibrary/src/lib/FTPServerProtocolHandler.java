@@ -38,10 +38,24 @@ public class FTPServerProtocolHandler {
 		if (message.startsWith(FTPClientProtocolHandler.USERNAME_MESSAGE)) {
 			String username = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
 
-			//TODO implemet UserManager class to manage the authorized users;
+			//TODO implement UserManager class to manage the authorized users;
 
 			return FTPServerProtocolHandler.SERVER_PASSWORD_EXPECTED_MESSAGE;
 		}
+		
+		if (message.startsWith(FTPClientProtocolHandler.USERPASSWORD_MESSAGE)) {
+			
+			String userPassword = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+			
+			//TODO here we have to check if the password is correct
+			//The next message: Login or Authentication failed
+			//For the moment we accept that the password is correct
+			
+			//
+			
+			
+		}
+		
 
 
 		return null;
