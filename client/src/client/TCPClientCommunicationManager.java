@@ -42,7 +42,7 @@ public class TCPClientCommunicationManager extends Thread{
 				clientResponce = ftpClientProtocolHandler.processServerMessage(inputFromServer);
 				if (clientResponce.equals(""))
 				{
-					System.out.println("[Client]: Handshake successfull. Waiting for command. ");
+
 //					TODO GET COMMAND FROM USER
 				}
 				output.writeUTF(clientResponce);
