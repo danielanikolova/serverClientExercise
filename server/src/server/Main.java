@@ -23,7 +23,8 @@ public class Main {
 			serverSocket = new ServerSocket(PORT);
 			System.out.println("[Server]: Server is running...");
 
-			// wait for a connection from client. Connection is made here. The  communication worker thread will close it when exiting
+			// wait for a connection from client. Connection is made here. The  communication worker thread 
+			//will close it when exiting
 			communicationSocket = serverSocket.accept();
 
 		} catch (IOException e) {
@@ -48,18 +49,19 @@ public class Main {
 				if (consoleInput.equalsIgnoreCase("exit")) {
 					terminate = true;
 				}
-
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				
 				if (!communication.isAlive()) {
 					System.out.println("Server is closed");
 					break;
 				}
+
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				
 			}
 
 		}
