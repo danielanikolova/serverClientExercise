@@ -14,15 +14,17 @@ public class RunClient {
 		Socket communicationSocket = null;
 
 		try {
-			System.out.println("Connecting to server " + host);
+			System.out.println("[Client]: Connecting to server " + host);
 			communicationSocket = new Socket(host, port);
-			System.out.println("Connected to server.");
+			System.out.println("[Client]: Connected to server host: " + host + " on port: " + port);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		Communication communication = new Communication(communicationSocket);
+
+
+		TCPClientCommunicationManager communication = new TCPClientCommunicationManager(communicationSocket);
 
 		communication.start();
 
@@ -33,7 +35,7 @@ public class RunClient {
 		}
 
 
-		System.out.println("Client disconnected.");
+		System.out.println("[Client]: Client disconnected.");
 
 	}
 

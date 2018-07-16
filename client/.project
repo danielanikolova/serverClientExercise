@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>FTPLibrary</name>
+			<type>2</type>
+			<location>C:/Users/d.nikolova/Desktop/serverClientExercise/FTPLibrary</location>
+		</link>
+	</linkedResources>
 </projectDescription>
