@@ -17,6 +17,7 @@ public class ClientThread extends Thread{
 	boolean serverHello = false;
 	boolean serverWelcome = false;
 	private String client_FQDN = "";
+	boolean isAuthenticated = false;
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public ClientThread(Socket socket) {
@@ -65,8 +66,11 @@ public class ClientThread extends Thread{
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
-				return AuthenticationProtocol.USERNAME_MESSAGE + "<" + password + ">";
+				// here we check 
+				if (isAuthenticated) {
+					
+				}
+				return AuthenticationProtocol.USERPASSWORD_MESSAGE + "<" + password + ">";
 			}
 		}
 		// sends username to the server

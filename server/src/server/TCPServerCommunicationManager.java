@@ -15,15 +15,13 @@ public class TCPServerCommunicationManager extends Thread{
 
 
 	private Socket socket;
-	private String localAddress;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
-	private volatile boolean terminate = false;
+	private volatile boolean terminate;
 
 	public TCPServerCommunicationManager(Socket socket, boolean terminate) {
 
 		this.socket = socket;
-		this.localAddress = socket.getLocalAddress().toString();
 		this.terminate = terminate;
 	}
 
@@ -56,10 +54,16 @@ public class TCPServerCommunicationManager extends Thread{
 				inputLine = input.readUTF();
 
 				// log message from client to console
-				System.out.println("[Server]: Client Command:" + " " + inputLine);
+				System.out.println("[Server]: Client Command: " + inputLine);
 
 				outputLine = ftpServerProtocolHandler.executeMessage(inputLine);
-
+				
+				if (outputLine.equals("200 Bye")) {
+					output.writeUTF(outputLine);
+					closeConnection();
+					terminate = true;
+				}
+				
 				if (outputLine != null && outputLine.length()>0) {
 					output.writeUTF(outputLine);
 				}

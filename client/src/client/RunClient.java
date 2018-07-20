@@ -5,11 +5,11 @@ import java.net.Socket;
 
 public class RunClient {
 
+	private static String host = "127.0.0.1";
+
+	private static int port = 4000;
+	
 	public static void main(String[] args) throws IOException {
-
-		String host = "127.0.0.1";
-
-		int port = 4000;
 
 		Socket communicationSocket = null;
 
@@ -21,9 +21,7 @@ public class RunClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
-
+		
 		TCPClientCommunicationManager communication = new TCPClientCommunicationManager(communicationSocket);
 
 		communication.start();

@@ -11,7 +11,6 @@ import lib.FTPServerProtocolHandler;
 public class ServerThread extends Thread{
 
 	private Socket socket;
-	private String localAddress;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 	private volatile boolean terminate = false;
@@ -21,7 +20,6 @@ public class ServerThread extends Thread{
 	public ServerThread(Socket socket, boolean terminate) {
 
 		this.socket = socket;
-		this.localAddress = socket.getLocalAddress().toString();
 		this.terminate = terminate;
 	}
 
@@ -64,7 +62,7 @@ public class ServerThread extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection();
+			//closeConnection();
 		}
 
 	}

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Main {
+public class RunServer {
 
 	private static final int PORT = 4000;
 
@@ -35,6 +35,7 @@ public class Main {
 
 		communication.start();
 
+		System.out.println("Please enter \"exit\" to close the server.");
 		String consoleInput = null;
 		while (true) {
 
@@ -42,7 +43,6 @@ public class Main {
 				try {
 					consoleInput = br.readLine();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 

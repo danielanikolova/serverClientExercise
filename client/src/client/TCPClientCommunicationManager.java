@@ -7,6 +7,7 @@ import java.net.Socket;
 
 import lib.FTPClientProtocolHandler;
 
+
 public class TCPClientCommunicationManager extends Thread{
 
 	private Socket socket;
@@ -40,11 +41,11 @@ public class TCPClientCommunicationManager extends Thread{
 				System.out.println("[Client]: A message from server: "+ inputFromServer);
 
 				clientResponce = ftpClientProtocolHandler.processServerMessage(inputFromServer);
-				if (clientResponce.equals(""))
-				{
-
-//					TODO GET COMMAND FROM USER
+				
+				if (clientResponce.equals(FTPClientProtocolHandler.CLOSE_COMMUNICATION)) {
+					closeCommunication();
 				}
+				
 				output.writeUTF(clientResponce);
 			}
 		} catch (Exception e) {
@@ -53,7 +54,7 @@ public class TCPClientCommunicationManager extends Thread{
 
 	}
 
-	private void closeSocket() {
+	private void closeCommunication() {
 		try {
 			socket.close();
 			input.close();
