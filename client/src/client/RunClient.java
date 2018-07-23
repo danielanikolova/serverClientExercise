@@ -2,12 +2,13 @@ package client;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class RunClient {
 
 	private static String host = "127.0.0.1";
-
 	private static int port = 4000;
+	private static boolean running = true;
 	
 	public static void main(String[] args) throws IOException {
 
@@ -25,16 +26,15 @@ public class RunClient {
 		TCPClientCommunicationManager communication = new TCPClientCommunicationManager(communicationSocket);
 
 		communication.start();
-
+		
 		try {
 			communication.join();
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
-		System.out.println("[Client]: Client disconnected.");
-
+				
+		
 	}
 
 }

@@ -5,10 +5,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import lib.CopyProcessor;
 import lib.FTPClientProtocolHandler;
+import lib.FTPProtocolHandler;
 
-
-public class TCPClientCommunicationManager extends Thread{
+public class TCPClientCommunicationManager extends Thread {
 
 	private Socket socket;
 	private DataOutputStream output = null;
@@ -33,20 +34,31 @@ public class TCPClientCommunicationManager extends Thread{
 
 			FTPClientProtocolHandler ftpClientProtocolHandler = new FTPClientProtocolHandler();
 
-			String clientResponce = "";
+			String clientResponse = "";
 
 			while (!socket.isClosed()) {
 
 				String inputFromServer = input.readUTF();
-				System.out.println("[Client]: A message from server: "+ inputFromServer);
+				System.out.println("[Client]: A message from server: " + inputFromServer);
 
-				clientResponce = ftpClientProtocolHandler.processServerMessage(inputFromServer);
-				
-				if (clientResponce.equals(FTPClientProtocolHandler.CLOSE_COMMUNICATION)) {
+				clientResponse = ftpClientProtocolHandler.processServerMessage(inputFromServer);
+
+				if (clientResponse.equals(FTPClientProtocolHandler.CLOSE_COMMUNICATION)) {
 					closeCommunication();
 				}
-				
-				output.writeUTF(clientResponce);
+
+				if (clientResponse.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT)) {
+					
+					CopyProcessor copyProcessor = new CopyProcessor(input, output);					
+					String source = clientResponse.substring(clientResponse.indexOf("<") + 1, 
+							clientResponse.indexOf(">"));					
+					copyProcessor.readFile(source);
+					
+					clientResponse = FTPClientProtocolHandler.FILE_SENT;
+
+				}
+
+				output.writeUTF(clientResponse);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
