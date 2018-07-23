@@ -62,11 +62,9 @@ public class TCPServerCommunicationManager extends Thread
 
 				// log message from client to console
 				System.out.println("[Server]: Client Command: " + inputLine);
-				boolean checkCommand = inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE);
 
 				if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
 				{
-
 					String fileName = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
 					CopyProcessor copyProcessor = new CopyProcessor(input, output);
 					copyProcessor.writeFile(fileName);
