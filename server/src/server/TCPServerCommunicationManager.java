@@ -5,30 +5,35 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import lib.CopyProcessor;
+import lib.FTPProtocolHandler;
 import lib.FTPServerProtocolHandler;
 
 /*
  * Responsible for TCP Communication. Receives and sends TCP data and pass the data as string to ProtocolHandler class.
  */
 
-public class TCPServerCommunicationManager extends Thread{
-
+public class TCPServerCommunicationManager extends Thread
+{
 
 	private Socket socket;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 	private volatile boolean terminate;
 
-	public TCPServerCommunicationManager(Socket socket, boolean terminate) {
+	public TCPServerCommunicationManager(Socket socket, boolean terminate)
+	{
 
 		this.socket = socket;
 		this.terminate = terminate;
 	}
 
 	@Override
-	public void run() {
+	public void run()
+	{
 
-		try {
+		try
+		{
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
 
@@ -43,46 +48,72 @@ public class TCPServerCommunicationManager extends Thread{
 			String outputLine = FTPServerProtocolHandler.getHelloMessage();
 
 			// send hello message to client
-			if (outputLine != null) {
+			if (outputLine != null)
+			{
 				output.writeUTF(outputLine);
 			}
 
 			FTPServerProtocolHandler ftpServerProtocolHandler = new FTPServerProtocolHandler();
 
-			while (!socket.isClosed() && !terminate) {
+			while (!socket.isClosed() && !terminate)
+			{
 
 				inputLine = input.readUTF();
 
 				// log message from client to console
 				System.out.println("[Server]: Client Command: " + inputLine);
+				boolean checkCommand = inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE);
 
-				outputLine = ftpServerProtocolHandler.executeMessage(inputLine);
-				
-				if (outputLine.equals("200 Bye")) {
+				if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
+				{
+
+					String fileName = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
+					CopyProcessor copyProcessor = new CopyProcessor(input, output);
+					copyProcessor.writeFile(fileName);
+					output.writeUTF(FTPServerProtocolHandler.FILE_ACCEPTED);
+
+				} else if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_READ))
+				{
+					String source = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
+					CopyProcessor copyProcessor = new CopyProcessor(input, output);
+					copyProcessor.readFile(source);
+				} else
+				{
+					outputLine = ftpServerProtocolHandler.executeMessage(inputLine);
+				}
+
+				if (outputLine.equals("200 Bye"))
+				{
 					output.writeUTF(outputLine);
 					closeConnection();
 					terminate = true;
 				}
-				
-				if (outputLine != null && outputLine.length()>0) {
+
+				if (outputLine != null && outputLine.length() > 0)
+				{
 					output.writeUTF(outputLine);
 				}
 			}
 
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			e.printStackTrace();
-		} finally {
+		} finally
+		{
 			closeConnection();
 		}
 
 	}
 
-	private void closeConnection() {
-		try {
+	private void closeConnection()
+	{
+		try
+		{
 			output.close();
 			input.close();
 			socket.close();
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 
