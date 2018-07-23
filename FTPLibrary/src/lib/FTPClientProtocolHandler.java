@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class FTPClientProtocolHandler {
+public class FTPClientProtocolHandler implements FTPProtocolHandler{
 
 	public static final String CLIENT_HELLO_MESSAGE = "HELLO";
 	public static final String USERNAME_MESSAGE = "USER";
@@ -15,6 +15,8 @@ public class FTPClientProtocolHandler {
 	public static final String DELETE = "DELETE";
 	public static final String QUIT = "QUIT";
 	public static final String CLOSE_COMMUNICATION = "Close communication";
+	
+	public static final String PROVIDING_FILE_CONTENT = "200 Providing file content";
 
 	boolean serverHello = false;
 	boolean serverWelcome = false;
@@ -38,12 +40,13 @@ public class FTPClientProtocolHandler {
 				return selectCommand();
 			}
 
-			if (message.startsWith(FTPServerProtocolHandler.SERVER_GIVE_FILE_CONTENT_COMMAND)) {
-				// TODO implement class that will sends encoded file line by line Base64
+			if (message.startsWith(FTPServerProtocolHandler.GIVE_FILE_CONTENT)) {
+				String sourceFile = readInputFromClient();
+				return PROVIDING_FILE_CONTENT + "<" + sourceFile + ">";
 			}
 
 			if (message.startsWith(FTPServerProtocolHandler.FILE_ACCEPTED)) {
-
+				return selectCommand();
 			}
 
 			if (message.startsWith(FTPServerProtocolHandler.INTERNAL_ERROR)) {
