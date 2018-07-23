@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class CopyProcessor
@@ -71,7 +72,33 @@ public class CopyProcessor
 	public void writeFile(String fileName)
 	{
 
-		//
+		String fileLine;
+		try
+		{
+			File destinationFile = new File(
+					"C:\\Users\\danie\\Desktop\\serverClientExercise\\destination\\" + fileName);
+
+			bw = new BufferedWriter(new FileWriter(destinationFile));
+
+			fileLine = input.readUTF();
+			while (fileLine != null)
+			{
+				if (fileLine.equals(FTPProtocolHandler.FILE_SENT))
+				{
+					br.close();
+					bw.close();
+					break;
+				}
+				bw.write(fileLine);
+				bw.write(System.lineSeparator());
+				bw.flush();
+				fileLine = input.readUTF();
+			}
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
