@@ -12,8 +12,7 @@ import java.io.IOException;
 
 public class CopyProcessor
 {
-	private BufferedReader br;
-	private BufferedWriter bw;
+
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 
@@ -25,6 +24,8 @@ public class CopyProcessor
 
 	public void readFile(String source)
 	{
+
+		BufferedReader br = null;
 
 		if (source == null)
 			throw new IllegalArgumentException("File name cannot be null.");
@@ -47,14 +48,6 @@ public class CopyProcessor
 			while (fileLine != null)
 			{
 				output.writeUTF(fileLine);
-				// try
-				// {
-				// Thread.sleep(100);
-				// } catch (InterruptedException e)
-				// {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
 				fileLine = br.readLine();
 			}
 
@@ -66,12 +59,22 @@ public class CopyProcessor
 		} catch (IOException e)
 		{
 			e.printStackTrace();
+		} finally
+		{
+			try
+			{
+				br.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void writeFile(String fileName)
 	{
 
+		BufferedWriter bw = null;
 		String fileLine;
 		try
 		{
@@ -85,8 +88,6 @@ public class CopyProcessor
 			{
 				if (fileLine.equals(FTPProtocolHandler.FILE_SENT))
 				{
-					br.close();
-					bw.close();
 					break;
 				}
 				bw.write(fileLine);
@@ -98,15 +99,29 @@ public class CopyProcessor
 		} catch (IOException e)
 		{
 			e.printStackTrace();
+		} finally
+		{
+			try
+			{
+				bw.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 	}
 
-	// New changes for Angel Djambazov
-
-	// public String readLine() throws IOException
+	// public void closeBuffer()
 	// {
-	// return br.readLine();
+	// try
+	// {
+	// br.close();
+	// bw.close();
+	// } catch (IOException e)
+	// {
+	// e.printStackTrace();
+	// }
 	// }
 
 }
