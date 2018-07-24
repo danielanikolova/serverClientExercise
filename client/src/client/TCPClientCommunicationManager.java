@@ -7,71 +7,83 @@ import java.net.Socket;
 
 import lib.CopyProcessor;
 import lib.FTPClientProtocolHandler;
-import lib.FTPProtocolHandler;
 
-public class TCPClientCommunicationManager extends Thread {
+public class TCPClientCommunicationManager extends Thread
+{
 
 	private Socket socket;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 
-	public TCPClientCommunicationManager(Socket socket) {
+	public TCPClientCommunicationManager(Socket socket)
+	{
 
 		this.socket = socket;
 	}
 
 	@Override
-	public void run() {
+	public void run()
+	{
 
-		try {
+		try
+		{
 			input = new DataInputStream(socket.getInputStream());
 			output = new DataOutputStream(socket.getOutputStream());
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 
-		try {
+		try
+		{
 
 			FTPClientProtocolHandler ftpClientProtocolHandler = new FTPClientProtocolHandler();
 
 			String clientResponse = "";
 
-			while (!socket.isClosed()) {
+			while (!socket.isClosed())
+			{
 
 				String inputFromServer = input.readUTF();
 				System.out.println("[Client]: A message from server: " + inputFromServer);
 
 				clientResponse = ftpClientProtocolHandler.processServerMessage(inputFromServer);
 
-				if (clientResponse.equals(FTPClientProtocolHandler.CLOSE_COMMUNICATION)) {
+				if (clientResponse.equals(FTPClientProtocolHandler.CLOSE_COMMUNICATION))
+				{
 					closeCommunication();
 				}
 
-				if (clientResponse.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT)) {
-					
-					CopyProcessor copyProcessor = new CopyProcessor(input, output);					
-					String source = clientResponse.substring(clientResponse.indexOf("<") + 1, 
-							clientResponse.indexOf(">"));					
+				if (clientResponse.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT))
+				{
+
+					CopyProcessor copyProcessor = new CopyProcessor(input, output);
+					String source = clientResponse.substring(clientResponse.indexOf("<") + 1,
+							clientResponse.indexOf(">"));
 					copyProcessor.readFile(source);
-					
+
 					clientResponse = FTPClientProtocolHandler.FILE_SENT;
 
 				}
 
 				output.writeUTF(clientResponse);
 			}
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 
 	}
 
-	private void closeCommunication() {
-		try {
+	private void closeCommunication()
+	{
+		try
+		{
 			socket.close();
 			input.close();
 			output.close();
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 
