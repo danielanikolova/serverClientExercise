@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-import lib.CopyProcessor;
 import lib.FTPClientProtocolHandler;
-import lib.FTPProtocolHandler;
 import lib.FTPServerProtocolHandler;
 import lib.MessagingLogger;
 
@@ -22,6 +20,7 @@ public class TCPServerCommunicationManager extends Thread
 	private Socket socket;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
+
 
 	public TCPServerCommunicationManager(Socket socket)
 	{
@@ -54,7 +53,7 @@ public class TCPServerCommunicationManager extends Thread
 				output.writeUTF(outputLine);
 			}
 
-			FTPServerProtocolHandler ftpServerProtocolHandler = new FTPServerProtocolHandler();
+			FTPServerProtocolHandler ftpServerProtocolHandler = new FTPServerProtocolHandler(input, output, Constants.SERVER_DIRECTORY_PATH);
 
 			while (!socket.isClosed() && !interrupted())
 			{
@@ -70,22 +69,24 @@ public class TCPServerCommunicationManager extends Thread
 					break;
 				}
 
-				if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
-				{
-					String fileName = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
-					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-					String copyResult = copyProcessor.writeFile(fileName, ftpServerProtocolHandler.getRecipient());
-					output.writeUTF(copyResult);
-
-				} else if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_READ))
-				{
-					String source = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
-					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-					copyProcessor.readFile(source);
-				} else
-				{
+//				if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
+//				{
+//					String fileName = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
+//					CopyProcessor copyProcessor = new CopyProcessor(input, output);
+//					String copyResult = copyProcessor.writeFile(fileName, ftpServerProtocolHandler.getRecipient());
+//					output.writeUTF(copyResult);
+//
+//				}
+//				else if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_READ))
+//				{
+//					String source = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
+//					CopyProcessor copyProcessor = new CopyProcessor(input, output);
+//					copyProcessor.readFile(source);
+//				}
+//				else
+//				{
 					outputLine = ftpServerProtocolHandler.executeMessage(inputLine);
-				}
+//				}
 
 				if (outputLine != null && outputLine.length() > 0)
 				{

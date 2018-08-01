@@ -414,3 +414,115 @@ Jul 30, 2018 11:26:20 PM client.TCPClientCommunicationManager run
 INFO: [Client]: A message from server: 100 Continue with password: 
 Jul 30, 2018 11:26:26 PM client.TCPClientCommunicationManager run
 INFO: [Client]: A message from server: 200 Login Successfull
+Aug 01, 2018 10:27:00 AM client.RunClient main
+INFO: [Client]: Connecting to server 127.0.0.1
+Aug 01, 2018 10:27:00 AM client.RunClient main
+INFO: [Client]: Connected to server host: 127.0.0.1 on port: 4000
+Aug 01, 2018 10:27:00 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 10:27:00 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 10:27:00 AM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 10:27:18 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Enter user name
+Aug 01, 2018 10:27:25 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 100 Continue with password: 
+Aug 01, 2018 10:27:33 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Login Successfull
+Aug 01, 2018 10:27:39 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 10:27:39 AM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 10:27:39 AM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 2:01:01 PM client.RunClient main
+INFO: [Client]: Connecting to server 127.0.0.1
+Aug 01, 2018 2:01:01 PM client.RunClient main
+INFO: [Client]: Connected to server host: 127.0.0.1 on port: 4000
+Aug 01, 2018 2:01:01 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 2:01:01 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 2:01:01 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 2:03:53 PM client.RunClient main
+INFO: [Client]: Connecting to server 10.10.64.39
+Aug 01, 2018 2:03:54 PM client.RunClient main
+INFO: [Client]: Connected to server host: 10.10.64.39 on port: 4000
+Aug 01, 2018 2:03:54 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 2:03:54 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 2:03:54 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 2:04:02 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Enter user name
+Aug 01, 2018 2:04:07 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 100 Continue with password: 
+Aug 01, 2018 2:04:10 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Login Successfull
+Aug 01, 2018 2:04:14 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 2:04:14 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 2:04:14 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 2:04:19 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Enter user name
+Aug 01, 2018 2:04:21 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 100 Continue with password: 
+Aug 01, 2018 2:04:25 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Login Successfull
+Aug 01, 2018 2:04:29 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 2:04:29 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 2:04:29 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 2:04:32 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Enter user name
+Aug 01, 2018 2:04:39 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 100 Continue with password: 
+Aug 01, 2018 2:04:42 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Login Successfull
+Aug 01, 2018 5:29:08 PM client.RunClient main
+INFO: [Client]: Connecting to server 10.10.64.39
+Aug 01, 2018 5:30:47 PM client.RunClient main
+INFO: [Client]: Connecting to server 127.0.0.1.
+Aug 01, 2018 5:30:47 PM client.RunClient main
+INFO: [Client]: Connected to server host: 127.0.0.1. on port: 4000
+Aug 01, 2018 5:30:47 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 5:30:47 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 5:30:47 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 5:30:55 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Enter user name
+Aug 01, 2018 5:30:58 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 100 Continue with password: 
+Aug 01, 2018 5:31:05 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Login Successfull
+Aug 01, 2018 5:31:20 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 5:31:20 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 5:31:20 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 5:32:27 PM client.RunClient main
+INFO: [Client]: Connecting to server 127.0.0.1.
+Aug 01, 2018 5:32:27 PM client.RunClient main
+INFO: [Client]: Connected to server host: 127.0.0.1. on port: 4000
+Aug 01, 2018 5:34:50 PM client.RunClient main
+INFO: [Client]: Connecting to server 127.0.0.1.
+Aug 01, 2018 5:34:50 PM client.RunClient main
+INFO: [Client]: Connected to server host: 127.0.0.1. on port: 4000
+Aug 01, 2018 5:34:50 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Secure File Routing Server - ver.0.1
+Aug 01, 2018 5:34:50 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: 200 Welcome <<127.0.0.1>>
+Aug 01, 2018 5:34:50 PM lib.FTPClientProtocolHandler processServerMessage
+INFO: [Client]: Handshake successfull. 
+Aug 01, 2018 5:34:57 PM client.TCPClientCommunicationManager run
+INFO: [Client]: A message from server: Enter user name

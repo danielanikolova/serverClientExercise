@@ -1,6 +1,8 @@
 package lib;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
@@ -9,7 +11,6 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 {
 
 	private static Logger logger = MessagingLogger.getLogger();
-	private static User user = new User();
 
 	public static final String CLIENT_HELLO_MESSAGE = "HELLO";
 	public static final String CREATE_ACCOUNT = "Create account";
@@ -27,13 +28,23 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 	public static final String LOGOUT = "LOGOUT";
 	public static final String EXIT = "EXIT";
 	public static final String CLOSE_COMMUNICATION = "Close communication";
-
 	public static final String PROVIDING_FILE_CONTENT = "200 Providing file content";
 
 	private boolean serverHello = false;
 	private boolean serverWelcome = false;
 	private boolean isAuthorized = false;
-	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private DataOutputStream output;
+	private DataInputStream input;
+	private User user;
+	private String userDirectoryPath;
+
+	public FTPClientProtocolHandler(DataInputStream input, DataOutputStream output, String directorypath) {
+		this.input = input;
+		this.output = output;
+		this.user = new User(directorypath);
+		this.userDirectoryPath = directorypath;
+	}
 
 	/*
 	 * Process a string command sent by the server Returns a string to be sent to
@@ -59,6 +70,19 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 			{
 				String sourceFile = readInputFromClient();
 				return PROVIDING_FILE_CONTENT + "<" + sourceFile + ">";
+			}
+
+
+			if (message.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT))
+			{
+
+				CopyProcessor copyProcessor = new CopyProcessor(input, output);
+				String source = message.substring(message.indexOf("<") + 1,
+						message.indexOf(">"));
+				String copyResult = copyProcessor.readFile(source);
+
+				return copyResult;
+
 			}
 
 			if (message.startsWith(FTPServerProtocolHandler.FILE_ACCEPTED))
@@ -217,6 +241,7 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 				serverHello = false;
 				serverWelcome = false;
 				isAuthorized = false;
+				user = new User(userDirectoryPath);
 				userCommand = FTPClientProtocolHandler.LOGOUT;
 				break;
 			case "6":

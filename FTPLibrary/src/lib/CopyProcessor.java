@@ -76,7 +76,7 @@ public class CopyProcessor
 		String fileLine;
 		try
 		{
-			File destinationFile = new File(user.getDirectoryPath() + fileName);
+			File destinationFile = new File(user.getDirectoryPath()+ File.separator + fileName);
 
 			bw = new BufferedWriter(new FileWriter(destinationFile));
 

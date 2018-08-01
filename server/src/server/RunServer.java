@@ -11,8 +11,6 @@ import lib.MessagingLogger;
 
 public class RunServer
 {
-
-	private static final int PORT = 4000;
 	private static Logger logger = MessagingLogger.getLogger();
 
 	public static void main(String[] args) throws IOException
@@ -24,7 +22,7 @@ public class RunServer
 
 		try
 		{
-			serverSocket = new ServerSocket(PORT);
+			serverSocket = new ServerSocket(Constants.PORT);
 			System.out.println("[Server]: Server is running...");
 
 			// wait for a connection from client. Connection is made here. The communication

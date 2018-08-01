@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-import lib.CopyProcessor;
 import lib.FTPClientProtocolHandler;
 import lib.FTPServerProtocolHandler;
 import lib.MessagingLogger;
@@ -37,7 +36,7 @@ public class TCPClientCommunicationManager extends Thread
 
 		try
 		{
-			FTPClientProtocolHandler ftpClientProtocolHandler = new FTPClientProtocolHandler();
+			FTPClientProtocolHandler ftpClientProtocolHandler = new FTPClientProtocolHandler(input, output, Constants.CLIENT_DIRECTORY_PATH);
 
 			String clientResponse = "";
 
@@ -57,20 +56,19 @@ public class TCPClientCommunicationManager extends Thread
 				{
 					closeCommunication();
 				}
+//
+//				if (clientResponse.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT))
+//				{
+//
+//					CopyProcessor copyProcessor = new CopyProcessor(input, output);
+//					String source = clientResponse.substring(clientResponse.indexOf("<") + 1,
+//							clientResponse.indexOf(">"));
+//					String copyResult = copyProcessor.readFile(source);
+//
+//					clientResponse = copyResult;
+//
+//				}
 
-				if (clientResponse.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT))
-				{
-
-					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-					String source = clientResponse.substring(clientResponse.indexOf("<") + 1,
-							clientResponse.indexOf(">"));
-					String copyResult = copyProcessor.readFile(source);
-
-					clientResponse = copyResult;
-
-				}
-
-				System.out.println(clientResponse);
 				output.writeUTF(clientResponse);
 
 				if (clientResponse.startsWith(FTPClientProtocolHandler.EXIT))

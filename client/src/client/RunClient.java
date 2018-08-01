@@ -5,25 +5,21 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 import lib.MessagingLogger;
+import lib.User;
 
 public class RunClient
 {
-
-	private static String host = "127.0.0.1";
-	private static int port = 4000;
-	private static boolean running = true;
-	private static Logger logger = MessagingLogger.getLogger();
-
 	public static void main(String[] args) throws IOException
 	{
 
+		Logger logger = MessagingLogger.getLogger();
 		Socket communicationSocket = null;
 
 		try
 		{
-			logger.info("[Client]: Connecting to server " + host);
-			communicationSocket = new Socket(host, port);
-			logger.info("[Client]: Connected to server host: " + host + " on port: " + port);
+			logger.info("[Client]: Connecting to server " + Constants.HOST);
+			communicationSocket = new Socket(Constants.HOST, Constants.PORT);
+			logger.info("[Client]: Connected to server host: " + Constants.HOST + " on port: " + Constants.PORT);
 
 		} catch (Exception e)
 		{
@@ -39,7 +35,6 @@ public class RunClient
 			communication.join();
 		} catch (InterruptedException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

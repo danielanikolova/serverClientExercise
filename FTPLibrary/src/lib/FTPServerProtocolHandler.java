@@ -1,6 +1,10 @@
 package lib;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.util.logging.Logger;
+
+
 
 public class FTPServerProtocolHandler implements FTPProtocolHandler
 {
@@ -32,9 +36,18 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 	public static final String PROVIDING_DIRECTORY_CONTENT = "200 Providing directory content";
 
 	private UserManager userManager = UserManager.getInstance();
-	private User user = new User();
+	private User user;
 	private User recipient = null;
 	private boolean createNewUser = false;
+	private DataOutputStream output = null;
+	private DataInputStream input = null;
+	private String serverDirectoryPath;
+
+	public FTPServerProtocolHandler(DataInputStream input, DataOutputStream output,  String serverDirectoryPath) {
+		this.output = output;
+		this.input = input;
+		this.serverDirectoryPath = serverDirectoryPath;
+	}
 
 	/*
 	 * Returns hello message as first step of handshake
@@ -58,6 +71,7 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 		// HELLO <client full qualified domain host name FQDN>
 		if (message.startsWith(FTPClientProtocolHandler.CLIENT_HELLO_MESSAGE))
 		{
+			user = new User(serverDirectoryPath);
 			user.setClient_FQDN(message.substring(message.indexOf("<") + 1, message.indexOf(">")));
 			return SERVER_WELCOME + " <<" + user.getClient_FQDN() + ">>";
 		}
@@ -163,6 +177,27 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 			return FTPServerProtocolHandler.PROVIDING_FILE_CONTENT;
 		}
 
+		//****************************
+
+		if (message.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
+		{
+			String fileName = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+			CopyProcessor copyProcessor = new CopyProcessor(input, output);
+			String copyResult = copyProcessor.writeFile(fileName, recipient);
+			return copyResult;
+
+		}
+		else if (message.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_READ))
+		{
+			String source = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+			CopyProcessor copyProcessor = new CopyProcessor(input, output);
+			copyProcessor.readFile(source);
+		}
+
+
+		//************************
+
+
 		if (message.startsWith(FTPClientProtocolHandler.LIST))
 		{
 			// here we list all files in current user directory
@@ -208,7 +243,7 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 			{
 				userManager.removeLoggedUser(user);
 			}
-			user = new User();
+			user = new User(serverDirectoryPath);
 			createNewUser = false;
 			return SERVER_HELLO_MESSAGE;
 		}
@@ -221,9 +256,5 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 		return FTPServerProtocolHandler.INTERNAL_ERROR;
 	}
 
-	public User getRecipient()
-	{
-		return recipient;
-	}
 
 }

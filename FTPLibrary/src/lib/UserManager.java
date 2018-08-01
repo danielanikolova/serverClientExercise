@@ -3,6 +3,8 @@ package lib;
 import java.util.HashMap;
 import java.util.Map;
 
+import lib.User;
+
 public class UserManager
 {
 	private static UserManager instance = new UserManager();

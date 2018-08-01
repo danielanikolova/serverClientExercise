@@ -10,13 +10,24 @@ public class User
 	private String client_FQDN;
 	private String userName;
 	private String password;
-	private String directoryPath = "C:\\Users\\danie\\Desktop\\serverClientExercise\\destination" + File.separator
-			+ userName;
+	private String directoryPath;
+
 	private Map<String, File> userFiles = new HashMap<>();
+
+
+	public User(String directoryPath) {
+		this.directoryPath = directoryPath;
+	}
+
+	public String getDirectoryPath()
+	{
+		return directoryPath;
+	}
 
 	public void setUserName(String userName)
 	{
 		this.userName = userName;
+		this.directoryPath = this.directoryPath + File.separator + userName;
 	}
 
 	public void setPassword(String password)
@@ -43,6 +54,8 @@ public class User
 	{
 		this.client_FQDN = client_FQDN;
 	}
+
+
 
 	// returns file from the file collection of the user
 	public File getFileByName(String name)
@@ -76,9 +89,6 @@ public class User
 		return false;
 	}
 
-	public String getDirectoryPath()
-	{
-		return directoryPath;
-	}
+
 
 }
