@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class CopyProcessor
 {
-
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 
@@ -22,7 +21,7 @@ public class CopyProcessor
 		this.output = output;
 	}
 
-	public void readFile(String source)
+	public String readFile(String source)
 	{
 
 		BufferedReader br = null;
@@ -51,11 +50,9 @@ public class CopyProcessor
 				fileLine = br.readLine();
 			}
 
-			output.writeUTF(FTPProtocolHandler.FILE_SENT);
-
 		} catch (FileNotFoundException e)
 		{
-			e.printStackTrace();
+			return FTPProtocolHandler.INTERNAL_ERROR;
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -69,17 +66,17 @@ public class CopyProcessor
 				e.printStackTrace();
 			}
 		}
+		return FTPProtocolHandler.FILE_SENT;
 	}
 
-	public void writeFile(String fileName)
+	public String writeFile(String fileName, User user)
 	{
 
 		BufferedWriter bw = null;
 		String fileLine;
 		try
 		{
-			File destinationFile = new File(
-					"C:\\Users\\danie\\Desktop\\serverClientExercise\\destination\\" + fileName);
+			File destinationFile = new File(user.getDirectoryPath() + fileName);
 
 			bw = new BufferedWriter(new FileWriter(destinationFile));
 
@@ -89,6 +86,7 @@ public class CopyProcessor
 				if (fileLine.equals(FTPProtocolHandler.FILE_SENT))
 				{
 					break;
+
 				}
 				bw.write(fileLine);
 				bw.write(System.lineSeparator());
@@ -96,9 +94,13 @@ public class CopyProcessor
 				fileLine = input.readUTF();
 			}
 
+			user.addFileInUserLibrary(fileName, destinationFile);
+			return FTPProtocolHandler.FILE_ACCEPTED;
+
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			return FTPProtocolHandler.INTERNAL_ERROR;
+
 		} finally
 		{
 			try
@@ -111,17 +113,5 @@ public class CopyProcessor
 		}
 
 	}
-
-	// public void closeBuffer()
-	// {
-	// try
-	// {
-	// br.close();
-	// bw.close();
-	// } catch (IOException e)
-	// {
-	// e.printStackTrace();
-	// }
-	// }
 
 }

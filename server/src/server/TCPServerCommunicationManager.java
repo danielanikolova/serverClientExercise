@@ -4,10 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import lib.CopyProcessor;
+import lib.FTPClientProtocolHandler;
 import lib.FTPProtocolHandler;
 import lib.FTPServerProtocolHandler;
+import lib.MessagingLogger;
 
 /*
  * Responsible for TCP Communication. Receives and sends TCP data and pass the data as string to ProtocolHandler class.
@@ -15,17 +18,15 @@ import lib.FTPServerProtocolHandler;
 
 public class TCPServerCommunicationManager extends Thread
 {
-
+	private static Logger logger = MessagingLogger.getLogger();
 	private Socket socket;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
-	private volatile boolean terminate;
 
-	public TCPServerCommunicationManager(Socket socket, boolean terminate)
+	public TCPServerCommunicationManager(Socket socket)
 	{
-
 		this.socket = socket;
-		this.terminate = terminate;
+
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class TCPServerCommunicationManager extends Thread
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
 
-			String inputLine;
+			String inputLine = null;
 
 			/*
 			 * Decide who speaks first; server or client. Check whether protocol requires
@@ -55,20 +56,26 @@ public class TCPServerCommunicationManager extends Thread
 
 			FTPServerProtocolHandler ftpServerProtocolHandler = new FTPServerProtocolHandler();
 
-			while (!socket.isClosed() && !terminate)
+			while (!socket.isClosed() && !interrupted())
 			{
 
 				inputLine = input.readUTF();
 
 				// log message from client to console
-				System.out.println("[Server]: Client Command: " + inputLine);
+				logger.info("[Server]: Client Command: " + inputLine);
+
+				if (inputLine.startsWith(FTPClientProtocolHandler.EXIT))
+				{
+					closeConnection();
+					break;
+				}
 
 				if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
 				{
 					String fileName = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
 					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-					copyProcessor.writeFile(fileName);
-					output.writeUTF(FTPServerProtocolHandler.FILE_ACCEPTED);
+					String copyResult = copyProcessor.writeFile(fileName, ftpServerProtocolHandler.getRecipient());
+					output.writeUTF(copyResult);
 
 				} else if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_READ))
 				{
@@ -78,13 +85,6 @@ public class TCPServerCommunicationManager extends Thread
 				} else
 				{
 					outputLine = ftpServerProtocolHandler.executeMessage(inputLine);
-				}
-
-				if (outputLine.equals("200 Bye"))
-				{
-					output.writeUTF(outputLine);
-					closeConnection();
-					terminate = true;
 				}
 
 				if (outputLine != null && outputLine.length() > 0)

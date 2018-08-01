@@ -1,0 +1,248 @@
+Jul 30, 2018 1:06:54 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 1:18:03 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 1:22:17 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 1:41:38 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 2:04:27 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 2:19:14 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 2:24:55 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 2:44:31 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 2:45:35 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 2:49:58 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 2:50:12 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 2:50:31 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 2:50:42 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 4:47:58 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 4:48:12 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 4:48:25 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 4:48:34 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 4:48:42 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 4:59:46 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 4:59:58 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 5:00:06 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 5:00:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 5:00:22 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 5:00:22 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 5:08:51 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 5:09:01 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 5:09:21 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 5:09:28 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 5:09:40 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 5:09:40 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 5:10:07 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 5:19:25 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 5:19:34 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 5:20:02 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 5:21:36 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 5:22:40 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 5:24:50 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 5:24:58 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 5:25:08 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 5:25:19 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 5:26:20 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 5:27:45 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:05:03 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:06:45 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 9:06:59 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 9:07:37 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 9:08:25 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 9:09:29 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:28:20 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:28:32 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 9:28:45 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 9:28:51 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 9:29:01 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 9:29:01 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:33:50 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:34:34 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 9:34:56 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 9:35:06 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 9:35:14 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 9:35:18 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:38:58 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:39:09 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 9:39:16 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 9:39:24 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 9:39:33 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 9:39:33 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:39:48 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 9:39:59 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<maria>
+Jul 30, 2018 9:40:12 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 9:40:32 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 9:40:32 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 9:40:39 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 10:34:38 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:34:46 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 10:34:53 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Jul 30, 2018 10:35:00 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 10:35:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:35:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:35:24 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 10:35:32 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 10:35:41 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 10:35:49 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:35:49 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:35:57 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 10:36:05 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 10:36:14 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 10:36:34 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:36:34 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:36:44 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 10:36:52 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<koko>
+Jul 30, 2018 10:36:52 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:57:16 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:57:45 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 10:57:54 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<DANI>
+Jul 30, 2018 10:58:02 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 10:58:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:58:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:58:22 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 10:58:30 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 10:58:40 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 10:58:50 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:58:50 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:58:57 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 10:59:06 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 10:59:17 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 10:59:24 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Jul 30, 2018 10:59:24 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 10:59:33 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 10:59:42 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 10:59:50 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<222>
+Jul 30, 2018 10:59:50 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 11:00:06 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimmimi>
+Jul 30, 2018 11:00:06 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 11:00:19 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 11:00:32 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<123>
+Jul 30, 2018 11:00:32 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Jul 30, 2018 11:00:41 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 11:00:49 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 11:01:07 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: EXIT
+Jul 30, 2018 11:25:59 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Jul 30, 2018 11:26:11 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Jul 30, 2018 11:26:20 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<mimi>
+Jul 30, 2018 11:26:26 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Jul 30, 2018 11:26:36 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: EXIT

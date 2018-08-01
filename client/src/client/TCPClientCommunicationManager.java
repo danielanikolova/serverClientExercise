@@ -4,27 +4,28 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 import lib.CopyProcessor;
 import lib.FTPClientProtocolHandler;
+import lib.FTPServerProtocolHandler;
+import lib.MessagingLogger;
 
 public class TCPClientCommunicationManager extends Thread
 {
-
+	private static Logger logger = MessagingLogger.getLogger();
 	private Socket socket;
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 
 	public TCPClientCommunicationManager(Socket socket)
 	{
-
 		this.socket = socket;
 	}
 
 	@Override
 	public void run()
 	{
-
 		try
 		{
 			input = new DataInputStream(socket.getInputStream());
@@ -36,16 +37,19 @@ public class TCPClientCommunicationManager extends Thread
 
 		try
 		{
-
 			FTPClientProtocolHandler ftpClientProtocolHandler = new FTPClientProtocolHandler();
 
 			String clientResponse = "";
 
-			while (!socket.isClosed())
+			while (!socket.isClosed() && !Thread.interrupted())
 			{
-
 				String inputFromServer = input.readUTF();
-				System.out.println("[Client]: A message from server: " + inputFromServer);
+				logger.info("[Client]: A message from server: " + inputFromServer);
+
+				if (inputFromServer.startsWith(FTPServerProtocolHandler.BYE))
+				{
+					closeCommunication();
+				}
 
 				clientResponse = ftpClientProtocolHandler.processServerMessage(inputFromServer);
 
@@ -60,13 +64,19 @@ public class TCPClientCommunicationManager extends Thread
 					CopyProcessor copyProcessor = new CopyProcessor(input, output);
 					String source = clientResponse.substring(clientResponse.indexOf("<") + 1,
 							clientResponse.indexOf(">"));
-					copyProcessor.readFile(source);
+					String copyResult = copyProcessor.readFile(source);
 
-					clientResponse = FTPClientProtocolHandler.FILE_SENT;
+					clientResponse = copyResult;
 
 				}
 
+				System.out.println(clientResponse);
 				output.writeUTF(clientResponse);
+
+				if (clientResponse.startsWith(FTPClientProtocolHandler.EXIT))
+				{
+					closeCommunication();
+				}
 			}
 		} catch (Exception e)
 		{
