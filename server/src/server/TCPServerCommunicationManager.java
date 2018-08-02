@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-import lib.FTPClientProtocolHandler;
-import lib.FTPServerProtocolHandler;
+import lib.FTPClientSideConstants;
 import lib.MessagingLogger;
 
 /*
@@ -63,7 +62,7 @@ public class TCPServerCommunicationManager extends Thread
 				// log message from client to console
 				logger.info("[Server]: Client Command: " + inputLine);
 
-				if (inputLine.startsWith(FTPClientProtocolHandler.EXIT))
+				if (inputLine.startsWith(FTPClientSideConstants.QUIT))
 				{
 					closeConnection();
 					break;
@@ -85,7 +84,7 @@ public class TCPServerCommunicationManager extends Thread
 //				}
 //				else
 //				{
-					outputLine = ftpServerProtocolHandler.executeMessage(inputLine);
+					outputLine = ftpServerProtocolHandler.processMessage(inputLine);
 //				}
 
 				if (outputLine != null && outputLine.length() > 0)

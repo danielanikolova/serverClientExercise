@@ -276,3 +276,73 @@ Aug 01, 2018 5:34:50 PM server.TCPServerCommunicationManager run
 INFO: [Server]: Client Command: HELLO <127.0.0.1>
 Aug 01, 2018 5:34:57 PM server.TCPServerCommunicationManager run
 INFO: [Server]: Client Command: REGISTER PLAIN
+Aug 02, 2018 11:58:50 AM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Aug 02, 2018 11:59:31 AM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 11:59:45 AM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<eeee>
+Aug 02, 2018 11:59:45 AM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 11:59:55 AM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<wwww>
+Aug 02, 2018 11:59:55 AM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 12:00:07 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<1>
+Aug 02, 2018 12:00:07 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 12:00:14 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<dani>
+Aug 02, 2018 12:00:14 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 12:01:18 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Aug 02, 2018 12:01:24 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Aug 02, 2018 12:01:27 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<dani>
+Aug 02, 2018 12:01:31 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Aug 02, 2018 12:01:36 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Aug 02, 2018 12:01:36 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Aug 02, 2018 12:01:46 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 12:01:49 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<dani>
+Aug 02, 2018 12:02:05 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Aug 02, 2018 12:02:10 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: EXIT
+Aug 02, 2018 5:46:44 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Aug 02, 2018 5:47:00 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: REGISTER PLAIN
+Aug 02, 2018 5:47:06 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Aug 02, 2018 5:47:08 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Aug 02, 2018 5:47:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Aug 02, 2018 5:47:13 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>
+Aug 02, 2018 5:47:17 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 5:47:23 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<dani>
+Aug 02, 2018 5:47:23 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 5:47:25 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<1234>
+Aug 02, 2018 5:47:25 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGIN
+Aug 02, 2018 5:47:38 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: USER<daniela>
+Aug 02, 2018 5:47:40 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: PASS<1234>
+Aug 02, 2018 5:47:49 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: LOGOUT
+Aug 02, 2018 5:47:49 PM server.TCPServerCommunicationManager run
+INFO: [Server]: Client Command: HELLO <127.0.0.1>

@@ -5,7 +5,6 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 import lib.MessagingLogger;
-import lib.User;
 
 public class RunClient
 {

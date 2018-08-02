@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-import lib.FTPClientProtocolHandler;
-import lib.FTPServerProtocolHandler;
+import lib.FTPClientSideConstants;
+import lib.FTPServerSideConstants;
 import lib.MessagingLogger;
 
 public class TCPClientCommunicationManager extends Thread
@@ -45,33 +45,21 @@ public class TCPClientCommunicationManager extends Thread
 				String inputFromServer = input.readUTF();
 				logger.info("[Client]: A message from server: " + inputFromServer);
 
-				if (inputFromServer.startsWith(FTPServerProtocolHandler.BYE))
+				if (inputFromServer.startsWith(FTPServerSideConstants.BYE))
 				{
 					closeCommunication();
 				}
 
-				clientResponse = ftpClientProtocolHandler.processServerMessage(inputFromServer);
+				clientResponse = ftpClientProtocolHandler.processMessage(inputFromServer);
 
-				if (clientResponse.equals(FTPClientProtocolHandler.CLOSE_COMMUNICATION))
+				if (clientResponse.equals(FTPClientSideConstants.CLOSE_COMMUNICATION))
 				{
 					closeCommunication();
 				}
-//
-//				if (clientResponse.startsWith(FTPClientProtocolHandler.PROVIDING_FILE_CONTENT))
-//				{
-//
-//					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-//					String source = clientResponse.substring(clientResponse.indexOf("<") + 1,
-//							clientResponse.indexOf(">"));
-//					String copyResult = copyProcessor.readFile(source);
-//
-//					clientResponse = copyResult;
-//
-//				}
 
 				output.writeUTF(clientResponse);
 
-				if (clientResponse.startsWith(FTPClientProtocolHandler.EXIT))
+				if (clientResponse.startsWith(FTPClientSideConstants.QUIT))
 				{
 					closeCommunication();
 				}

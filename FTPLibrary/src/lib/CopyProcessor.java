@@ -41,7 +41,7 @@ public class CopyProcessor
 		{
 			br = new BufferedReader(new FileReader(sourceFile));
 
-			output.writeUTF(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE + "<" + fileName + ">");
+			output.writeUTF(FTPConstants.START_COPY_PROCESSOR_WRITE + "<" + fileName + ">");
 			String fileLine = br.readLine();
 
 			while (fileLine != null)
@@ -52,7 +52,7 @@ public class CopyProcessor
 
 		} catch (FileNotFoundException e)
 		{
-			return FTPProtocolHandler.INTERNAL_ERROR;
+			return FTPConstants.INTERNAL_ERROR;
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class CopyProcessor
 				e.printStackTrace();
 			}
 		}
-		return FTPProtocolHandler.FILE_SENT;
+		return FTPConstants.FILE_SENT;
 	}
 
 	public String writeFile(String fileName, User user)
@@ -83,7 +83,7 @@ public class CopyProcessor
 			fileLine = input.readUTF();
 			while (fileLine != null)
 			{
-				if (fileLine.equals(FTPProtocolHandler.FILE_SENT))
+				if (fileLine.equals(FTPConstants.FILE_SENT))
 				{
 					break;
 
@@ -95,11 +95,11 @@ public class CopyProcessor
 			}
 
 			user.addFileInUserLibrary(fileName, destinationFile);
-			return FTPProtocolHandler.FILE_ACCEPTED;
+			return FTPConstants.FILE_ACCEPTED;
 
 		} catch (IOException e)
 		{
-			return FTPProtocolHandler.INTERNAL_ERROR;
+			return FTPConstants.INTERNAL_ERROR;
 
 		} finally
 		{
