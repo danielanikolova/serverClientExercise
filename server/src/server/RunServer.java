@@ -17,34 +17,15 @@ public class RunServer
 	{
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		ServerSocket serverSocket = null;
-		Socket communicationSocket = null;
 
-		try
-		{
-			serverSocket = new ServerSocket(Constants.PORT);
-			System.out.println("[Server]: Server is running...");
+		ConnectionThread connectionThread = new ConnectionThread(Constants.PORT);
+		connectionThread.start();
 
-			// wait for a connection from client. Connection is made here. The communication
-			// worker thread
-			// will close it when exiting
-			communicationSocket = serverSocket.accept();
-
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		TCPServerCommunicationManager communication = new TCPServerCommunicationManager(communicationSocket);
-
-		communication.start();
-		try
-		{
-			communication.join();
-		} catch (InterruptedException e2)
-		{
-			logger.info("Communication is closed");
-		}
+//		try {
+//			connectionThread.join();
+//		} catch (InterruptedException e1) {
+//			logger.info("500 Error. ConnectionManagerThread interrupted");
+//		}
 
 		System.out.println("Please enter \"exit\" to close the server.");
 		String consoleInput = br.readLine();
@@ -61,8 +42,8 @@ public class RunServer
 			consoleInput = br.readLine();
 		}
 
-		communication.interrupt();
-		serverSocket.close();
+		connectionThread.interrupt();
+		System.exit(0);
 
 	}
 

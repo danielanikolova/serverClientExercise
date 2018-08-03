@@ -13,7 +13,7 @@ import lib.MessagingLogger;
  * Responsible for TCP Communication. Receives and sends TCP data and pass the data as string to ProtocolHandler class.
  */
 
-public class TCPServerCommunicationManager extends Thread
+public class TCPServerCommunication extends Thread
 {
 	private static Logger logger = MessagingLogger.getLogger();
 	private Socket socket;
@@ -21,7 +21,7 @@ public class TCPServerCommunicationManager extends Thread
 	private DataInputStream input = null;
 
 
-	public TCPServerCommunicationManager(Socket socket)
+	public TCPServerCommunication(Socket socket)
 	{
 		this.socket = socket;
 
@@ -53,6 +53,7 @@ public class TCPServerCommunicationManager extends Thread
 			}
 
 			FTPServerProtocolHandler ftpServerProtocolHandler = new FTPServerProtocolHandler(input, output, Constants.SERVER_DIRECTORY_PATH);
+			CommunicationManager.getInstance().addCommunication(this);
 
 			while (!socket.isClosed() && !interrupted())
 			{
@@ -68,24 +69,8 @@ public class TCPServerCommunicationManager extends Thread
 					break;
 				}
 
-//				if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_WRITE))
-//				{
-//					String fileName = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
-//					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-//					String copyResult = copyProcessor.writeFile(fileName, ftpServerProtocolHandler.getRecipient());
-//					output.writeUTF(copyResult);
-//
-//				}
-//				else if (inputLine.startsWith(FTPProtocolHandler.START_COPY_PROCESSOR_READ))
-//				{
-//					String source = inputLine.substring(inputLine.indexOf("<") + 1, inputLine.indexOf(">"));
-//					CopyProcessor copyProcessor = new CopyProcessor(input, output);
-//					copyProcessor.readFile(source);
-//				}
-//				else
-//				{
-					outputLine = ftpServerProtocolHandler.processMessage(inputLine);
-//				}
+				outputLine = ftpServerProtocolHandler.processMessage(inputLine);
+
 
 				if (outputLine != null && outputLine.length() > 0)
 				{
@@ -103,10 +88,11 @@ public class TCPServerCommunicationManager extends Thread
 
 	}
 
-	private void closeConnection()
+	public void closeConnection()
 	{
 		try
 		{
+			CommunicationManager.getInstance().removeCommunication(this);
 			output.close();
 			input.close();
 			socket.close();
@@ -116,4 +102,6 @@ public class TCPServerCommunicationManager extends Thread
 		}
 
 	}
+
+
 }
