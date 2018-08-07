@@ -6,11 +6,12 @@ public final class FTPServerSideConstants extends FTPConstants{
 	public static final String SERVER_WELCOME = "200 Welcome";
 	//“100 Continue with password - Salt: <salt bytes encoded in Base64> Iterations: <iteration count>”
 	public static final String CONTINUE_WITH_PASSWORD = "100 Continue with password: ";
-	public static final String ENTER_USERNAME = "Enter user name";
-	public static final String ACCOUNT_CREATED = "Created account";
+	//the server allowed registration after handshake
+	public static final String REGISTRATION_ALLOWED = "100 Continue with password: ";
+	public static final String REGISTER = "Created account";
 	public static final String LOGIN = "Login";
 	//Server response: “200 Login Successful” or “403 Authentication failed”
-	public static final String SERVER_LOGIN_SUCCESSFULL = "200 Login Successfull";
+	public static final String AUTH_DATA_ACCEPTED = "200 Auth data accepted";
 	public static final String SERVER_AUTHENTICATION_FAILED = "403 Authentication failed";
 	//“100 Give the content” or “400 No such recipient”  or “401 Unauthorized” or “500 <other internal error description>”
 	public static final String GIVE_THE_CONTENT = "100 Give the content";

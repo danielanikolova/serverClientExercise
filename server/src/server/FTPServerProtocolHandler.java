@@ -10,6 +10,7 @@ import lib.FTPConstants;
 import lib.FTPProtocolHandler;
 import lib.FTPServerSideConstants;
 import lib.MessagingLogger;
+import lib.MyCrypto;
 import lib.User;
 
 
@@ -25,6 +26,9 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 	private DataOutputStream output = null;
 	private DataInputStream input = null;
 	private String serverDirectoryPath;
+	private String salt = null;
+	int iterations = 0;
+	String secretKey = null;
 
 	public FTPServerProtocolHandler(DataInputStream input, DataOutputStream output,  String serverDirectoryPath) {
 		this.output = output;
@@ -62,19 +66,29 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 		// Continue with user name message
 		if (message.startsWith(FTPClientSideConstants.REGISTER_PLAIN))
 		{
-			createNewUser = true;
-			return FTPServerSideConstants.ENTER_USERNAME;
+			salt = MyCrypto.encodeBase64( FTPConstants.REGISTRATION_PASS);
+			iterations = MyCrypto.getRandomIterations();
+			return FTPServerSideConstants.CONTINUE_WITH_PASSWORD + "<" + salt + ">" + "<" + iterations + ">";
 		}
 
-		if (message.startsWith(FTPClientSideConstants.LOGIN))
-		{
-			return FTPServerSideConstants.ENTER_USERNAME;
+		if (message.startsWith(FTPClientSideConstants.REGISTRATION_PASS)) {
+
+			secretKey = MyCrypto.saltParameter(salt, FTPConstants.REGISTRATION_PASS, iterations);
+			String clientRegistrationPass = message.substring(message.indexOf("<")+1, message.indexOf(">"));
+
+			if (secretKey.equals(clientRegistrationPass)) {
+				return FTPServerSideConstants.REGISTRATION_ALLOWED;
+			}
+			 return FTPServerSideConstants.SERVER_AUTHENTICATION_FAILED;
 		}
 
-		// Here we get the user name from the client
-		if (message.startsWith(FTPClientSideConstants.USER))
-		{
-			String username = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+		if (message.startsWith(FTPClientSideConstants.REGISTER)) {
+
+			String usernameEncrypted = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+			String passwordEncrypted = message.substring(message.lastIndexOf("<") + 1, message.lastIndexOf(">"));
+
+			String username = MyCrypto.decodeBase64(usernameEncrypted);
+			String passwordHash = MyCrypto.decodeBase64(passwordEncrypted);
 
 			if (createNewUser)
 			{
@@ -86,48 +100,41 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 					return FTPServerSideConstants.SERVER_AUTHENTICATION_FAILED;
 				}
 				user.setUserName(username);
-				return FTPServerSideConstants.CONTINUE_WITH_PASSWORD;
-			}
+				user.setPassword(passwordHash);
 
-			if (userManager.containsUserWithUsername(username))
-			{
-				user.setUserName(username);
-				return FTPServerSideConstants.CONTINUE_WITH_PASSWORD;
+				return FTPServerSideConstants.AUTH_DATA_ACCEPTED ;
 			}
-
-			// returns SERVER_AUTHENTICATION_FAILED if there is no user with the entered
-			// user name;
-			return FTPServerSideConstants.SERVER_AUTHENTICATION_FAILED;
 
 		}
 
-		// here we get the user password
-		if (message.startsWith(FTPClientSideConstants.PASS))
-		{
+		if (message.startsWith(FTPClientSideConstants.LOGIN)) {
 
-			String userPassword = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+			String usernameSalted = message.substring(message.indexOf("<") + 1, message.indexOf(">"));
+			String passwordSalted = message.substring(message.lastIndexOf("<") + 1, message.lastIndexOf(">"));
+
 
 			if (createNewUser)
 			{
-				user.setPassword(userPassword);
-				userManager.addUser(user);
-				userManager.addLoggedInUser(user);
-				return FTPServerSideConstants.SERVER_LOGIN_SUCCESSFULL;
+				String username = null;
+				String passwordHash = null;
+				// here we check if there is a registered user with user name entered from the
+				// client.Returns SERVER_AUTHENTICATION_FAILED if there is someone with the
+				// given user name
+				if (userManager.containsUserWithUsername(username))
+				{
+					return FTPServerSideConstants.SERVER_AUTHENTICATION_FAILED;
+				}
+				user.setUserName(username);
+
+				user.setPassword(passwordHash);
+
+				return FTPServerSideConstants.AUTH_DATA_ACCEPTED ;
 			}
 
-			User userInDB = userManager.getUserByUsername(user.getUserName());
-
-			// here we check if the entered password equals the password of the registered
-			// user
-			if (userPassword.equals(userInDB.getPassword()))
-
-			{
-				user.setPassword(userPassword);
-				return FTPServerSideConstants.SERVER_LOGIN_SUCCESSFULL;
-			}
-
-			return FTPServerSideConstants.SERVER_AUTHENTICATION_FAILED;
 		}
+
+
+
 
 		if (message.startsWith(FTPConstants.START_COPY_PROCESSOR_WRITE))
 		{

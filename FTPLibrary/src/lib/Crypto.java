@@ -33,6 +33,7 @@ public class Crypto {
 		return result;
 	}
 
+	//generate salt
 	public static byte[] generateRandomBytes(int length) {
 		byte[] bytes = new byte[length];
 		try {

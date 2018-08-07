@@ -9,9 +9,11 @@ import java.util.logging.Logger;
 
 import lib.CopyProcessor;
 import lib.FTPClientSideConstants;
+import lib.FTPConstants;
 import lib.FTPProtocolHandler;
 import lib.FTPServerSideConstants;
 import lib.MessagingLogger;
+import lib.MyCrypto;
 import lib.User;
 import lib.Utils;
 
@@ -29,6 +31,9 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 	private DataInputStream input;
 	private User user;
 	private String userDirectoryPath;
+	private String salt = null;
+	int iterations = 0;
+	String secretKey = null;
 
 	public FTPClientProtocolHandler(DataInputStream input, DataOutputStream output, String directorypath) {
 		this.input = input;
@@ -72,23 +77,7 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 
 					logger.info("[Client]: Handshake successfull. ");
 
-					System.out.println("Select action:");
-					System.out.println("1 - register");
-					System.out.println("2 - login");
-					System.out.println("3 - exit");
-
-					String clientCommand = readInputFromClient();
-
-					switch (clientCommand)
-						{
-						case "1":
-							return FTPClientSideConstants.REGISTER_PLAIN;
-						case "2":
-							return FTPClientSideConstants.LOGIN;
-						case "3":
-							return FTPClientSideConstants.QUIT;
-
-						}
+					return FTPClientSideConstants.REGISTER_PLAIN;
 
 				}
 			}
@@ -96,33 +85,62 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 
 		if (serverHelloAccepted && serverWelcomeAccepted)
 		{
-			if (message.startsWith(FTPServerSideConstants.ENTER_USERNAME))
-			{
-
-				System.out.println("Please enter user name: ");
-
-				clientInput = readInputFromClient();
-				user.setUserName(clientInput);
-
-				return FTPClientSideConstants.USER + "<" + clientInput + ">";
-			}
 
 			if (message.startsWith(FTPServerSideConstants.CONTINUE_WITH_PASSWORD))
 			{
-				System.out.println("Enter password:");
-				String password = readInputFromClient();
 
-				return FTPClientSideConstants.PASS + "<" + password + ">";
+				salt = message.substring(message.charAt('<')+1,message.charAt('>') );
+				iterations =Integer.parseInt(message.substring(message.lastIndexOf(('<')+ 1, message.lastIndexOf('>'))));
+
+
+				secretKey = MyCrypto.saltParameter(salt, FTPConstants.REGISTRATION_PASS, iterations);
+
+				return FTPClientSideConstants.PASS + "<" + secretKey + ">";
 			}
 
-			if (message.startsWith(FTPServerSideConstants.SERVER_LOGIN_SUCCESSFULL))
-			{
+			if (message.startsWith(FTPServerSideConstants.REGISTRATION_ALLOWED)) {
 
 				isAuthorized = true;
+				String userInput = selectLoginOrRegister();
 
-				return selectCommand();
+
+
+				if (userInput.equals("register")) {
+
+					//gets user name from client and encrypt it
+					String username = MyCrypto.encodeBase64(getPassword());
+					//gets password from client, hashes and encrypt it
+					String password = MyCrypto.encodeBase64(MyCrypto.generateHash(getUserName()));
+
+						return FTPClientSideConstants.REGISTER + "<" + username + ">" + "<" + password + ">";
+				}else {
+					//login existing user in the database
+
+					String salt = MyCrypto.generateRandomSalt();
+					int iterations = MyCrypto.getRandomIterations();
+
+					//gets user name from client and encrypt it
+					String username = getPassword();
+					//gets password from client, hashes and encrypt it
+					String passwordHash = MyCrypto.generateHash(getUserName());
+
+					String usernameSalted = MyCrypto.saltParameter(salt, username, iterations);
+					String passwordSalted = MyCrypto.saltParameter(salt, passwordHash, iterations);
+
+					 return FTPClientSideConstants.LOGIN + "<" + usernameSalted + ">" + "<" + passwordSalted + ">"
+					 							+ "<" + salt + ">" + "<" + iterations + ">";
+				}
 
 			}
+
+//			if (message.startsWith(FTPServerSideConstants.SERVER_LOGIN_SUCCESSFULL))
+//			{
+//
+//				isAuthorized = true;
+//
+//				return selectCommand();
+//
+//			}
 
 		}
 
@@ -196,6 +214,39 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 		}
 
 		return null;
+	}
+
+	private String getPassword() {
+		System.out.println("Enter username: ");
+
+		return readInputFromClient();
+	}
+
+	private String getUserName() {
+		System.out.println("Enter password: ");
+		return readInputFromClient();
+	}
+
+	private String selectLoginOrRegister() {
+		System.out.println("Select action:");
+		System.out.println("1 - register");
+		System.out.println("2 - login");
+
+		String userInput = readInputFromClient();
+		String choise = null;
+		switch (userInput) {
+		case "1":
+			choise = "register";
+			break;
+		case "2":
+			choise = "login";
+			break;
+
+		default:
+			selectLoginOrRegister();
+			break;
+		}
+		return choise;
 	}
 
 	private String selectCommand()
