@@ -66,7 +66,7 @@ public class FTPServerProtocolHandler implements FTPProtocolHandler
 		// Continue with user name message
 		if (message.startsWith(FTPClientSideConstants.REGISTER_PLAIN))
 		{
-			salt = MyCrypto.encodeBase64( FTPConstants.REGISTRATION_PASS);
+			byte[] salt = MyCrypto.generateRandomSalt();
 			iterations = MyCrypto.getRandomIterations();
 			return FTPServerSideConstants.CONTINUE_WITH_PASSWORD + "<" + salt + ">" + "<" + iterations + ">";
 		}
