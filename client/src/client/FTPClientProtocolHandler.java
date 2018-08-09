@@ -89,13 +89,13 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 			if (message.startsWith(FTPServerSideConstants.CONTINUE_WITH_PASSWORD))
 			{
 
-				salt = message.substring(message.charAt('<')+1,message.charAt('>') );
-				iterations =Integer.parseInt(message.substring(message.lastIndexOf(('<')+ 1, message.lastIndexOf('>'))));
-
-
-				secretKey = MyCrypto.saltParameter(salt, FTPConstants.REGISTRATION_PASS, iterations);
-
-				return FTPClientSideConstants.PASS + "<" + secretKey + ">";
+//				salt = message.substring(message.charAt('<')+1,message.charAt('>') );
+//				iterations =Integer.parseInt(message.substring(message.lastIndexOf(('<')+ 1, message.lastIndexOf('>'))));
+//
+//
+//				secretKey = MyCrypto.saltParameter(salt, FTPConstants.REGISTRATION_PASS, iterations);
+//
+//				return FTPClientSideConstants.PASS + "<" + secretKey + ">";
 			}
 
 			if (message.startsWith(FTPServerSideConstants.REGISTRATION_ALLOWED)) {
@@ -107,29 +107,29 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 
 				if (userInput.equals("register")) {
 
-					//gets user name from client and encrypt it
-					String username = MyCrypto.encodeBase64(getPassword());
-					//gets password from client, hashes and encrypt it
-					String password = MyCrypto.encodeBase64(MyCrypto.generateHash(getUserName()));
-
-						return FTPClientSideConstants.REGISTER + "<" + username + ">" + "<" + password + ">";
-				}else {
-					//login existing user in the database
-
-					String salt = MyCrypto.generateRandomSalt();
-					int iterations = MyCrypto.getRandomIterations();
-
-					//gets user name from client and encrypt it
-					String username = getPassword();
-					//gets password from client, hashes and encrypt it
-					String passwordHash = MyCrypto.generateHash(getUserName());
-
-					String usernameSalted = MyCrypto.saltParameter(salt, username, iterations);
-					String passwordSalted = MyCrypto.saltParameter(salt, passwordHash, iterations);
-
-					 return FTPClientSideConstants.LOGIN + "<" + usernameSalted + ">" + "<" + passwordSalted + ">"
-					 							+ "<" + salt + ">" + "<" + iterations + ">";
-				}
+//					//gets user name from client and encrypt it
+//					String username = MyCrypto.encodeBase64(getPassword());
+//					//gets password from client, hashes and encrypt it
+//					String password = MyCrypto.encodeBase64(MyCrypto.generateHash(getUserName()));
+//
+//						return FTPClientSideConstants.REGISTER + "<" + username + ">" + "<" + password + ">";
+//				}else {
+//					//login existing user in the database
+//
+//					byte[] salt = MyCrypto.generateRandomSalt();
+//					int iterations = MyCrypto.getRandomIterations();
+//
+//					//gets user name from client and encrypt it
+//					String username = getPassword();
+//					//gets password from client, hashes and encrypt it
+//					String passwordHash = MyCrypto.generateHash(getUserName());
+//
+//					String usernameSalted = MyCrypto.saltParameter(salt, username, iterations);
+//					String passwordSalted = MyCrypto.saltParameter(salt, passwordHash, iterations);
+//
+//					 return FTPClientSideConstants.LOGIN + "<" + usernameSalted + ">" + "<" + passwordSalted + ">"
+//					 							+ "<" + salt + ">" + "<" + iterations + ">";
+//				}
 
 			}
 
@@ -212,7 +212,7 @@ public class FTPClientProtocolHandler implements FTPProtocolHandler
 		{
 			return FTPClientSideConstants.LOGIN;
 		}
-
+		}
 		return null;
 	}
 
